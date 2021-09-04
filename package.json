@@ -1,0 +1,28 @@
+{
+  "name": "projeto-luiza-code",
+  "version": "1.0.0",
+  "description": "Projeto Luiza Code 3ª Edição",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauraferraz5/projeto-luiza-code.git"
+  },
+  "author": "Claudia, Janine, Laura, Maria Alice, Marina e Tamires",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lauraferraz5/projeto-luiza-code/issues"
+  },
+  "homepage": "https://github.com/lauraferraz5/projeto-luiza-code#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-routes": "^1.0.1",
+    "express-validation": "^3.0.8",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
