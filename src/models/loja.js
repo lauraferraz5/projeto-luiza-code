@@ -34,6 +34,6 @@ const loja = (sequelize, DataTypes) => {
             tableName: "loja",
         }
     )
-    return Loja
+    return Loja;
 }
-module.exports = loja
+module.exports = loja;
