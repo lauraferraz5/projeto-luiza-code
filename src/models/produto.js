@@ -9,7 +9,6 @@ const produto = (sequelize, DataTypes) => {
       },
       categoria: {
         type: DataTypes.STRING,
-        // unique: true,   // quando não é único, precisa colocar falso ou não coloca unique?
         allowNull: false,
       },
       preco: {
@@ -17,7 +16,6 @@ const produto = (sequelize, DataTypes) => {
       },
       marca: {
         type: DataTypes.STRING,
-        // unique: true,
         allowNull: false,
       },
     },
@@ -25,7 +23,6 @@ const produto = (sequelize, DataTypes) => {
       tableName: "produto",
     }
   );
-
   return Produto;
 };
 
