@@ -6,8 +6,7 @@ const { body, check, validationResult } = require("express-validator");
 
 const clienteService = new ClienteService(cliente);
 
-router.post(
-  "/",
+router.post("/",
   body("nome").not().isEmpty().trim().escape(),
   body("cpf").not().isEmpty().trim().escape(),
   body("cep").not().isEmpty().trim().escape(),

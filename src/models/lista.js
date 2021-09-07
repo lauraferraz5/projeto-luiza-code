@@ -7,30 +7,6 @@ const lista = (sequelize, DataTypes) => {
         enum: ["Em andamento", "Realizada", "Retirada"],
         allowNull: false
       },
-      produtoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "produto",
-          key: "id",
-        },
-      },
-      clienteId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "cliente",
-          key: "id",
-        },
-      },
-      lojaId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "loja",
-          key: "id",
-        },
-      },
     },
     {
       tableName: "lista",

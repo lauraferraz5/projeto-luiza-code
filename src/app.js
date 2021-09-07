@@ -15,5 +15,5 @@ sequelize.sync().then(() => {
 });
 
 app.listen(3002, () => {
-  console.log("Servidor em pé....!");
+  console.log("Servidor ativo na porta 3002!");
 });
