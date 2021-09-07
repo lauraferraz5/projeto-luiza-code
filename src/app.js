@@ -10,7 +10,7 @@ app.use("/", routers);
 // app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 //{ force: true }
-sequelize.sync().then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log("Conectado com o banco com sucesso!");
 });
 
