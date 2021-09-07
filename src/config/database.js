@@ -2,7 +2,8 @@ module.exports = {
   dialect: "postgres",
   host: "localhost",
   port: 5432,
-  database: "projetoLuizaCode",
+  // database: "projetoLuizaCode",
+  database: "postgres",
   username: "postgres",
-  password: "3343",
+  password: "root",
 };
