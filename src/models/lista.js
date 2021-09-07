@@ -5,6 +5,7 @@ const lista = (sequelize, DataTypes) => {
       status: {
         type: DataTypes.STRING,
         enum: ["Em andamento", "Realizada", "Retirada"],
+        allowNull: false
       },
       produtoId: {
         type: DataTypes.INTEGER,
