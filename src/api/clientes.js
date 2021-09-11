@@ -9,12 +9,12 @@ const clienteService = new ClienteService(cliente);
 router.post(
   "/",
   body("nome").not().isEmpty().trim().escape(),
-  body("cpf").not().isEmpty().trim().escape(),
-  body("cep").not().isEmpty().trim().escape(),
+  body("cpf").not().isEmpty().trim().escape(), // add regex
+  body("cep").not().isEmpty().trim().escape(), // add regex
   body("cidade").not().isEmpty().trim().escape(),
   body("estado").not().isEmpty().trim().escape(),
   body("rua").not().isEmpty().trim().escape(),
-  check("numero")
+  body("numero")
     .not()
     .isEmpty()
     .matches(/\d/)
