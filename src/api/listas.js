@@ -10,17 +10,14 @@ router.post("/",
     body("ProdutoId")
         .not()
         .isEmpty()
-        // .matches(/\d/)
         .withMessage("Deve ser um id de produto válido!"),
     body("ClienteId")
         .not()
         .isEmpty()
-        // .matches(/\d/)
         .withMessage("Deve ser um id de cliente válido!"),
     body("LojaId")
         .not()
         .isEmpty()
-        // .matches(/\d/)
         .withMessage("Deve ser um id de loja válido!"),
     async (req, res) => {
         /*
@@ -79,5 +76,33 @@ router.put("/:listaId",
 
 );
 
+
+router.put("/adicionarProduto/:listaId", 
+
+  body("ProdutoId")
+  .not()
+  .isEmpty()
+  .withMessage("Deve ser um id de produto válido!"),
+
+  async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    let {listaId} = req.params;
+    const {ProdutoId} = req.body;
+
+    try {
+        await listaService.adicionarProduto(listaId, ProdutoId);
+        res.status(200).send("Produto adicionado com sucesso!");
+    } catch (erro) {
+        res.status(400).send(erro.message);
+    }
+}
+  
+
+);
 
 module.exports = router;

@@ -3,7 +3,7 @@ class ProdutoService {
     this.produto = ProdutoModel;
   }
 
-  async get() {
+  async getProdutos() {
     const produtos = await this.produto.findAll();
     return produtos;
   }

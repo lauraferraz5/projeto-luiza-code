@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
       description: 'Desculpe, tivemos um problema com a requisição'
     }
   */
-  const produtos = await produtoService.get();
+  const produtos = await produtoService.getProdutos();
   res.status(200).json(produtos);
 });
 
