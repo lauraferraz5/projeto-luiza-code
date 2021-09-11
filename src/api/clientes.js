@@ -19,10 +19,8 @@ router.post(
   body("cep")
     .not()
     .isEmpty()
-    .trim()
-    .escape()
-    // .matches(/^[0-9]{5}-[0-9]{3}$/)
-    // .withMessage("Deve ser um CEP válido!")
+    .matches(/^[0-9]{5}-[0-9]{3}$/)
+    .withMessage("Deve ser um CEP válido!")
     , 
 
   body("cidade").not().isEmpty().trim().escape(),
@@ -56,7 +54,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      await clienteService.adicionar(...req.body);
+      await clienteService.adicionar(req.body);
       res.status(201).send("Cliente cadastrado com sucesso!");
     } catch (erro) {
       res.status(400).send(erro.message);

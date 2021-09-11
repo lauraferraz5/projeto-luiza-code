@@ -2,25 +2,25 @@ const express = require("express");
 const router = express.Router();
 const { lista } = require("../models");
 const ListaService = require("../services/listas");
-const { body, check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 const listaService = new ListaService(lista);
 router.post("/",
     body("status").not().isEmpty().trim().escape(),
-    check("produtoId")
+    body("ProdutoId")
         .not()
         .isEmpty()
-        .matches(/\d/)
+        // .matches(/\d/)
         .withMessage("Deve ser um id de produto válido!"),
-    check("clienteId")
+    body("ClienteId")
         .not()
         .isEmpty()
-        .matches(/\d/)
+        // .matches(/\d/)
         .withMessage("Deve ser um id de cliente válido!"),
-    check("lojaId")
+    body("LojaId")
         .not()
         .isEmpty()
-        .matches(/\d/)
+        // .matches(/\d/)
         .withMessage("Deve ser um id de loja válido!"),
     async (req, res) => {
         /*
@@ -45,8 +45,8 @@ router.post("/",
             return res.status(400).json({ errors: errors.array() });
         }
         try {
-            await listaService.adicionar(...req.body);
-            res.status(201).send("Produto adicionado à lista com sucesso!");
+            await listaService.criar(req.body);
+            res.status(201).send("Lista criada com sucesso!");
         } catch (erro) {
             res.status(400).send(erro.message);
         }
@@ -54,16 +54,30 @@ router.post("/",
 );
 
 
-// router.get("/:clienteId", async (req, res) => {
-//     const { id } = req.params;
-//     const listas = await listaService.get(id);
-//     res.status(200).json(listas);
-// });
+router.put("/:listaId", 
 
+  body("status").not().isEmpty().trim().escape(),
 
+  async (req, res) => {
 
-// router.delete("/:produtoId", async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
-// });
+    let {listaId} = req.params;
+    const {status} = req.body;
+
+    try {
+        await listaService.atualizarStatus(listaId,status);
+        res.status(200).send("Lista atualizada com sucesso!");
+    } catch (erro) {
+        res.status(400).send(erro.message);
+    }
+}
+  
+
+);
+
 
 module.exports = router;
