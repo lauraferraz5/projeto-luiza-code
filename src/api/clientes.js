@@ -9,8 +9,22 @@ const clienteService = new ClienteService(cliente);
 router.post(
   "/",
   body("nome").not().isEmpty().trim().escape(),
-  body("cpf").not().isEmpty().trim().escape(), // add regex
-  body("cep").not().isEmpty().trim().escape(), // add regex
+
+  body("cpf")
+    .not()
+    .isEmpty()
+    .matches(/^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2})$/)
+    .withMessage("Deve ser um CPF válido!"),
+
+  body("cep")
+    .not()
+    .isEmpty()
+    .trim()
+    .escape()
+    // .matches(/^[0-9]{5}-[0-9]{3}$/)
+    // .withMessage("Deve ser um CEP válido!")
+    , 
+
   body("cidade").not().isEmpty().trim().escape(),
   body("estado").not().isEmpty().trim().escape(),
   body("rua").not().isEmpty().trim().escape(),
