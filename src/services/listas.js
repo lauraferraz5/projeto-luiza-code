@@ -1,6 +1,7 @@
 const { produto } = require("../models");
 const sequelize = require("../config/sequelize");
 const { QueryTypes } = require('sequelize');
+const lista = require("../models/lista");
 
 class ListaService {
     constructor(ListaModel) {
@@ -8,7 +9,6 @@ class ListaService {
     }
 
     async adicionar({ clienteId, produtoId, lojaId }) {
-
         let lista = await this.lista.findOne({
             where: {
                 ClienteId: clienteId,
@@ -34,6 +34,27 @@ class ListaService {
                 throw new Error(`Já existe em sua lista um produto dessa categoria: ${categ}!`);
             }
         }
+    }
+
+    async remover({ clienteId, produtoId, lojaId }) {
+        let lista = await this.lista.findOne({
+            where: {
+                ClienteId: clienteId,
+                LojaId: lojaId,
+                status: 'Em andamento'
+            },
+        });
+        const prod = await produto.findByPk(produtoId)
+        await lista.removeProduto(prod)
+    }
+
+    async get(clienteId) {
+        const listas = await this.lista.findAll({
+            where: {
+                ClienteId: clienteId
+            }
+        });
+        return listas;
     }
 }
 
