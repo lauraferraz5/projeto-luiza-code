@@ -1,54 +1,99 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "title": "Magalu Produtos API",
-    "description": "Projeto desenvolvido para ensinar swagger"
+    "description": "Swagger da API Omni Channel"
   },
-  "host": "localhost:3001",
+  "host": "localhost:3002",
   "basePath": "/",
   "tags": [
     {
-      "name": "Produto",
-      "description": "Endpoints relacionados ao recuso de produto"
+      "name": "Produtos",
+      "description": "Endpoints relacionados a produto;"
+    },
+    {
+      "name": "Clientes",
+      "description": "Endpoints relacionados a clientes;"
+    },
+    {
+      "name": "Listas",
+      "description": "Endpoints relacionados a listas;"
+    },
+    {
+      "name": "Lojas",
+      "description": "Endpoints relacionados a lojas;"
     }
   ],
-  "schemes": ["http", "https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/produtos/": {
       "get": {
-        "tags": ["Produtos"],
-        "description": "Endpoint parra obter uma lista de produto",
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para obter uma lista de produtos.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Produto encontrado",
+            "description": "Produto encontrado!",
             "schema": {
-              "$ref": "#/definitions/Produto"
+              "$ref": "#/definitions/Produtos"
             }
+          },
+          "400": {
+            "description": "Desculpe, tivemos um problema com a requisição!"
+          },
+          "404": {
+            "description": "Não existem produtos cadastrados!"
+          }
+        }
+      }
+    },
+    "/lojas/": {
+      "get": {
+        "tags": [
+          "Lojas"
+        ],
+        "description": "Endpoint para obter todas as lojas disponíveis.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lojas encontradas"
           },
           "400": {
             "description": "Desculpe, tivemos um problema com a requisição"
           },
           "404": {
-            "description": "Produto não encontrado"
+            "description": "Lojas não encontradas"
           }
         }
-      },
+      }
+    },
+    "/clientes/": {
       "post": {
-        "tags": ["Produtos"],
-        "description": "Endpoint para criar um produto",
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Endpoint para criar um novo cliente.",
         "parameters": [
           {
-            "name": "novoProduto",
+            "name": "NovoCliente",
             "in": "body",
-            "description": "Informações do produto",
+            "description": "Informações do cliente",
             "required": true,
             "type": "object",
             "schema": {
-              "$ref": "#/definitions/NovoProduto"
+              "$ref": "#/definitions/NovoCliente"
             }
           }
         ],
@@ -57,59 +102,239 @@
             "description": "Created"
           },
           "400": {
-            "description": "Nome e preço são obrigatórios"
+            "description": "Nome, CPF, RG, CEP e numero são campos obrigatórios!"
           }
         }
       }
     },
-    "/fornecedores/": {
+    "/listas/": {
+      "post": {
+        "tags": [
+          "Listas"
+        ],
+        "description": "Endpoint para inserir produto em uma lista.",
+        "parameters": [
+          {
+            "name": "AdicionarProduto",
+            "in": "body",
+            "description": "Os ids devem ser conhecidos!",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AdicionarProduto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto inserido com sucesso!"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Todos os campos são obrigatórios!"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Listas"
+        ],
+        "description": "Endpoint para inserir produto em uma lista.",
+        "parameters": [
+          {
+            "name": "AdicionarProduto",
+            "in": "body",
+            "description": "Os ids devem ser conhecidos!",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AdicionarProduto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto removido com sucesso!"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Todos os campos são obrigatórios!"
+          }
+        }
+      }
+    },
+    "/listas/{clienteId}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Listas"
+        ],
+        "description": "Endpoint para exibir todas as listas de um mesmo cliente.",
+        "parameters": [
+          {
+            "name": "clienteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto inserido com sucesso!",
+            "schema": {
+              "$ref": "#/definitions/ListarListas"
+            }
+          },
+          "400": {
+            "description": "Todos os campos são obrigatórios!"
+          }
+        }
       }
     }
   },
   "definitions": {
-    "Produto": {
+    "Produtos": {
       "type": "object",
       "properties": {
         "id": {
           "type": "number",
           "example": 1
         },
-        "nome": {
+        "produto": {
           "type": "string",
-          "example": "Dell"
+          "example": "Iphone SE"
+        },
+        "categoria": {
+          "type": "string",
+          "example": "celular"
         },
         "preco": {
           "type": "number",
-          "example": 12345
+          "example": 1000
         },
-        "updated_at": {
+        "marca": {
           "type": "string",
-          "example": "2021-12-12 03:03:00"
+          "example": "Apple"
         },
-        "created_at": {
+        "createdAt": {
           "type": "string",
-          "example": "2021-12-12 03:03:00"
+          "example": "2021-09-12T18:34:44.057Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-09-12T18:34:44.057Z"
         }
       }
     },
-    "NovoProduto": {
+    "NovoCliente": {
       "type": "object",
       "properties": {
         "nome": {
           "type": "string",
-          "example": "Dell"
+          "example": "Cláudia"
         },
-        "preco": {
+        "cpf": {
+          "type": "string",
+          "example": "381.493.542-04"
+        },
+        "rg": {
+          "type": "string",
+          "example": "000000"
+        },
+        "cep": {
+          "type": "string",
+          "example": "05036-001"
+        },
+        "cidade": {
+          "type": "string",
+          "example": "SP"
+        },
+        "estado": {
+          "type": "string",
+          "example": "SP"
+        },
+        "rua": {
+          "type": "string",
+          "example": "Navegantes"
+        },
+        "numero": {
           "type": "number",
-          "example": 12345
+          "example": 2016
+        },
+        "complemento": {
+          "type": "string",
+          "example": "Ap 101"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-09-12T18:34:44.057Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-09-12T18:34:44.057Z"
         }
       },
-      "required": ["nome", "preco"]
+      "required": [
+        "nome",
+        "cpf",
+        "rg",
+        "cep",
+        "numero"
+      ]
+    },
+    "AdicionarProduto": {
+      "type": "object",
+      "properties": {
+        "clienteId": {
+          "type": "number",
+          "example": 2
+        },
+        "lojaId": {
+          "type": "number",
+          "example": 2
+        },
+        "produtoId": {
+          "type": "number",
+          "example": 4
+        }
+      },
+      "required": [
+        "clienteId",
+        "lojaId",
+        "produtoId"
+      ]
+    },
+    "ListarListas": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "status": {
+          "type": "string",
+          "example": "Em andamento"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-09-12T18:36:09.553Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-09-12T18:36:09.553Z"
+        },
+        "ClienteId": {
+          "type": "number",
+          "example": 1
+        },
+        "LojaId": {
+          "type": "number",
+          "example": 2
+        }
+      }
     }
   }
 }

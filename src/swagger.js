@@ -5,34 +5,74 @@ const endpointFiles = ["./src/app.js"];
 
 const doc = {
   info: {
-    version: "1.0.0",
+    version: "2.0.0",
     title: "Magalu Produtos API",
-    description: "Projeto desenvolvido para ensinar swagger",
+    description: "Swagger da API Omni Channel",
   },
-  host: "localhost:3001",
+  host: "localhost:3002",
   basePath: "/",
   schemes: ["http", "https"],
   consumes: ["application/json"],
   produces: ["application/json"],
   tags: [
     {
-      name: "Produto",
-      description: "Endpoints relacionados ao recuso de produto",
+      name: "Produtos",
+      description: "Endpoints relacionados a produto;",
+    },
+    {
+      name: "Clientes",
+      description: "Endpoints relacionados a clientes;",
+    },
+    {
+      name: "Listas",
+      description: "Endpoints relacionados a listas;",
+    },
+    {
+      name: "Lojas",
+      description: "Endpoints relacionados a lojas;",
     },
   ],
   definitions: {
-    Produto: {
+    Produtos:
+    {
       id: 1,
-      nome: "Dell",
-      preco: 12345,
-      updated_at: "2021-12-12 03:03:00",
-      created_at: "2021-12-12 03:03:00",
+      produto: "Iphone SE",
+      categoria: "celular",
+      preco: 1000,
+      marca: "Apple",
+      createdAt: "2021-09-12T18:34:44.057Z",
+      updatedAt: "2021-09-12T18:34:44.057Z"
     },
-    NovoProduto: {
-      $nome: "Dell",
-      $preco: 12345,
+    NovoCliente:
+    {
+      $nome: "Cláudia",
+      $cpf: "381.493.542-04",
+      $rg: "000000",
+      $cep: "05036-001",
+      cidade: "SP",
+      estado: "SP",
+      rua: "Navegantes",
+      $numero: 2016,
+      complemento: "Ap 101",
+      createdAt: "2021-09-12T18:34:44.057Z",
+      updatedAt: "2021-09-12T18:34:44.057Z"
     },
-  },
+    AdicionarProduto:
+    {
+      $clienteId: 2,
+      $lojaId: 2,
+      $produtoId: 4
+    },
+    ListarListas:
+    {
+      id: 1,
+      status: "Em andamento",
+      createdAt: "2021-09-12T18:36:09.553Z",
+      updatedAt: "2021-09-12T18:36:09.553Z",
+      ClienteId: 1,
+      LojaId: 2
+    },
+  }
 };
 
 swaggerAutogen(outputFile, endpointFiles, doc);
