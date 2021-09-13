@@ -82,9 +82,7 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
     npm install
 ```
 
-```sh
-    npm init
-```
+3. Execute
 
 
 ```sh
@@ -92,16 +90,15 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
 ```
 
 ```sh
-    node src/swagger.js
-```
-
-6. Executar a API localmente
-
-```sh
     npm start
 ```
 
+4. Acesse a API localmente
+
+
+
 ```sh
+No browser: 
     localhost:3002/docs
 ```
 
@@ -128,7 +125,7 @@ No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
 - [Cláudia Aparicio](https://github.com/ClauApa)
 - [Laura Ferraz](https://github.com/lauraferraz5/)
 - [Maria Alice](https://github.com/alicemelosousa)
-- [Marina Júia](https://github.com/marinajulia)
+- [Marina Júlia](https://github.com/marinajulia)
 - [Tamires Lucena](https://github.com/TamiresLucena)
 
 <!-- IMAGES -->
