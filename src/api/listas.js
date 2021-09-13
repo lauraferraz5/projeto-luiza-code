@@ -96,4 +96,46 @@ router.delete("/",
     }
 );
 
+router.put("/:listaId",
+
+    body("status").not().isEmpty().trim().escape(),
+
+    async (req, res) => {
+        /*
+            #swagger.tags = ['Listas']
+            #swagger.description = 'Endpoint para atualizar status de uma lista.'
+            #swagger.parameters['AtualizarStatus'] = {
+                in: 'body',
+                description: 'Atualizar status de uma lista!',
+                required: true,
+                type: 'object',
+                schema: { $ref: '#/definitions/AtualizarStatus'}
+            }
+            #swagger.responses[200] = {
+                description: 'Atualizado com sucesso!',
+            }
+            #swagger.responses[400] = {
+                description: 'Desculpe, tivemos um problema com a requisição!'
+            }
+        */
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        let { listaId } = req.params;
+        const { status } = req.body;
+
+        try {
+            await listaService.atualizarStatus(listaId, status);
+            res.status(200).send("Lista atualizada com sucesso!");
+        } catch (erro) {
+            res.status(400).send(erro.message);
+        }
+    }
+
+
+);
+
 module.exports = router;
