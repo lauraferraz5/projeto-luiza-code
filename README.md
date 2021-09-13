@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h2 align="center"><b>Luiza code - 3ª edição</b></h2>
+  <h2 align="center"><b>Luiza Code - 3ª edição</b></h2>
     <h3 align="center">Desafio final</h2>
 
   <p align="center">
@@ -34,14 +34,15 @@
 <!-- ABOUT THE PROJECT -->
 
 ## Sobre o projeto
-Esse projeto foi desenvolvido no encerramento do curso de aceleração de carreiras focado em Node.js e tem como principal objetivo a construção de um serviço HTTP resolvendo a funcionalidade de 
+
+Esse projeto foi desenvolvido no encerramento do curso de aceleração de carreiras focado em Node.js e tem como principal objetivo a construção de um serviço HTTP resolvendo a funcionalidade de
 Omni Channel do cliente. Atendendo e respeitando requisitos e regras de negócio pré-determinados.
 
 ### Ferramentas Utilizadas
 
-O projeto foi desenvolvido com auxílios das seguintes ferramentas e stack de desenvolvimento: 
+O projeto foi desenvolvido com auxílio das seguintes ferramentas e stack de desenvolvimento:
 
-- JavaScript 
+- JavaScript
 - Node.Js
 - PostgreSQL
 - Express.Js
@@ -55,20 +56,17 @@ O projeto foi desenvolvido com auxílios das seguintes ferramentas e stack de de
 - Excel
 - Trello
 
-
 ### Regras de Negócio
-
 
 - O cliente pode adicionar ou remover produtos de seu carrinho;
 - Em adicionar: O cliente só poderá comprar UM produto por <b>categoria</b>;
-- Enquanto o cliente está no processo de escolhas do produto, sua lista de compras tem o status do tipo <b>em andamento</b>;
-- Ao término da compra, o status se altera para compra <b>realizada</b> e e após a retirada do produto, o status se altera para <b> retirado</b>;
-- O cliente pode consultar todos os produtos e todas lojas disponíveis, sua lista de compra em andamento e o histórico de as suas listas;
-
+- Enquanto o cliente está no processo de escolha do produto, sua lista de compras tem o status do tipo <b>em andamento</b>;
+- Ao término da compra, o status se altera para compra <b>realizada</b> e e após a retirada do produto, o status se altera para <b> retirada</b>;
+- O cliente pode consultar todos os produtos e todas as lojas disponíveis, sua lista de compra em andamento e o histórico de suas listas;
 
 ## :book: Instruções Gerais
 
-Para ter acesso à API, faz-se necessário seguir as instruções abaixo: 
+Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
 
 1. Clone o repositório do github
 
@@ -76,14 +74,13 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
    git clone https://github.com/lauraferraz5/projeto-luiza-code
 ```
 
-2. Instale todos os módulos necessários 
+2. Instale todos os módulos necessários
 
 ```sh
     npm install
 ```
 
 3. Execute
-
 
 ```sh
     npm run swagger
@@ -95,21 +92,16 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
 
 4. Acesse a API localmente
 
-
-
 ```sh
-No browser: 
+No browser:
     localhost:3002/docs
 ```
 
 ### Endpoints
 
-O cliente poderá ter acesso aos seguintes módulo e seus endpoints:
-
+O cliente poderá ter acesso aos seguintes módulos e seus endpoints:
 
 ![Endpoints Clientes][endpoints-cliente]
-
-
 
 ### Rodando aplicação localmente com Swagger
 
@@ -127,7 +119,4 @@ No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
 
 <!-- IMAGES -->
 
-
 [endpoints-cliente]: images/swagger-completo.jpeg
-
-
