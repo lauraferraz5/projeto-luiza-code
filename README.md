@@ -91,7 +91,7 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
 ```
 
 ```sh
-    npm install espress-routes
+    npm install express-routes
 ```
 
 ```sh
