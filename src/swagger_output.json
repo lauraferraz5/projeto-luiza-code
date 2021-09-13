@@ -141,7 +141,7 @@
         "tags": [
           "Listas"
         ],
-        "description": "Endpoint para inserir produto em uma lista.",
+        "description": "Endpoint para remover produto em uma lista.",
         "parameters": [
           {
             "name": "AdicionarProduto",
@@ -190,6 +190,40 @@
           },
           "400": {
             "description": "Todos os campos são obrigatórios!"
+          }
+        }
+      }
+    },
+    "/listas/{listaId}": {
+      "put": {
+        "tags": [
+          "Listas"
+        ],
+        "description": "Endpoint para atualizar status de uma lista.",
+        "parameters": [
+          {
+            "name": "listaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AtualizarStatus",
+            "in": "body",
+            "description": "Atualizar status de uma lista!",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AtualizarStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Atualizado com sucesso!"
+          },
+          "400": {
+            "description": "Desculpe, tivemos um problema com a requisição!"
           }
         }
       }
@@ -333,6 +367,15 @@
         "LojaId": {
           "type": "number",
           "example": 2
+        }
+      }
+    },
+    "AtualizarStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "Em andamento"
         }
       }
     }

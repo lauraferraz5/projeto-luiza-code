@@ -89,9 +89,9 @@ class ListaService {
         if (!listaStatus) {
             throw new Error("Lista não encontrada!");
         }
-        if (listaStatus.status != "Em andamento" || listaStatus.status != "Realizada" || listaStatus.status != "Retirada") {
-            throw new Error("Status da compra inválido");
-        }
+        // if (listaStatus.status != "Realizada" || listaStatus.status != "Retirada") {
+        //     throw new Error("Status da compra inválido");
+        // }
         try {
 
             await this.lista.update({ status: status }, { where: { id: listaId } }); //atualizando o registro c a nova alteração

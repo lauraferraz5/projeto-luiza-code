@@ -71,7 +71,7 @@ router.delete("/",
     async (req, res) => {
         /*
             #swagger.tags = ['Listas']
-            #swagger.description = 'Endpoint para inserir produto em uma lista.'
+            #swagger.description = 'Endpoint para remover produto em uma lista.'
             #swagger.parameters['AdicionarProduto'] = {
                 in: 'body',
                 description: 'Os ids devem ser conhecidos!',
