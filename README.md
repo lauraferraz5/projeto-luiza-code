@@ -111,6 +111,8 @@ No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
 
 ## Equipe
 
+Turma 1 - Equipe E - Grupo: <b>DevsDivas</b>
+
 - [Cláudia Aparicio](https://github.com/ClauApa)
 - [Laura Ferraz](https://github.com/lauraferraz5/)
 - [Maria Alice](https://github.com/alicemelosousa)
