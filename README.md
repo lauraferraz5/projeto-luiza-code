@@ -128,6 +128,6 @@ No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
 <!-- IMAGES -->
 
 
-[endpoints-cliente]: images/swagger-completo.png
+[endpoints-cliente]: images/swagger-completo.jpeg
 
 
