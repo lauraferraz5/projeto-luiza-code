@@ -6,8 +6,7 @@ const { body, check, validationResult } = require("express-validator");
 
 const clienteService = new ClienteService(cliente);
 
-router.post(
-  "/",
+router.post("/",
   body("nome").not().isEmpty().trim().escape(),
 
   body("cpf")
@@ -33,20 +32,20 @@ router.post(
     .withMessage("Deve ser um número válido!"),
   async (req, res) => {
     /*
-      #swagger.tags = ['Produtos']
-      #swagger.description = 'Endpoint para criar um produto'
-      #swagger.parameters['novoProduto] = {
+      #swagger.tags = ['Clientes']
+      #swagger.description = 'Endpoint para criar um novo cliente.'
+      #swagger.parameters['NovoCliente'] = {
         in: 'body',
-        description: 'Informações do produto',
+        description: 'Informações do cliente',
         required: true,
         type: 'object',
-        schema: { $ref: '#/definitions/NovoProduto'}
+        schema: { $ref: '#/definitions/NovoCliente'}
       }
-      #swager.responses[201] = {
-        description: 'Produto criado com sucesso'
+      #swager.responses[200] = {
+        description: 'Cliente criado com sucesso!'
       }
       #swagger.responses[400] = {
-        description: 'Nome e preço são obrigatórios'
+        description: 'Nome, CPF, RG, CEP e numero são campos obrigatórios!'
       }
     */
     const errors = validationResult(req);

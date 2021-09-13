@@ -1,112 +1,82 @@
+const { produto } = require("../models");
+const sequelize = require("../config/sequelize");
+const { QueryTypes } = require('sequelize');
+const lista = require("../models/lista");
+
 class ListaService {
     constructor(ListaModel) {
         this.lista = ListaModel;
     }
 
-    async criar(lista) {
-        //verificar se o cliente ja tem uma lista em andamento
-        const listaCliente = await this.lista.findOne({
+    async adicionar({ clienteId, produtoId, lojaId }) {
+        let lista = await this.lista.findOne({
             where: {
-                status: lista.status,
+                ClienteId: clienteId,
+                LojaId: lojaId,
+                status: 'Em andamento'
             },
-
         });
-        if (lista.status === "Em andamento") {
-            throw new Error("Já existe uma lista em aberto para esse cliente!");
+        if (lista == null) {
+            lista = await this.lista.create({ ClienteId: clienteId, LojaId: lojaId, status: 'Em andamento' })
+            const prod = await produto.findByPk(produtoId)
+            if (prod == null) {
+                throw new Error('Este produto não existe!')
+            }
+            else {
+                await lista.addProduto(prod)
+            }
         }
-        try {
-            await this.lista.create(lista);
-        } catch (erro) {
-            console.error(erro.message);
-            throw erro;
-        }
-    }
-
-    async atualizarStatus(listaId, status) {
-
-        //verifica o status da lista
-
-        const listaStatus = await this.lista.findOne({
-            where: {
-                id: listaId,
-            },
-
-        });
-
-        if (!listaStatus) {
-            throw new Error("Lista não encontrada!");
-        }
-
-        //VALIDAR TIPO DE STATUS
-        // console.log(status)
-        // if (status != " ") { 
-        //     throw new Error("Status da compra inválido");
-        // } else if (status != "Em andamento") { 
-        //     throw new Error("Status da compra inválido");
-        // } else if (status != "Realizada") { 
-        //     throw new Error("Status da compra inválido"); 
-        // } else if (status != "Retirada") {
-        //     throw new Error("Status da compra inválido"); 
-        // }
-
-        try {
-
-            await this.lista.update({
-                status: status
-            }, {
-                where: {
-                    id: listaId
+        else {
+            const prod = await produto.findByPk(produtoId)
+            if (prod == null) {
+                throw new Error('Este produto não existe!')
+            }
+            else {
+                const categ = prod.dataValues.categoria
+                const idlista = lista.dataValues.id
+                const existeProd = await sequelize.query(`SELECT FROM lista_produto AS LP INNER JOIN produto AS P ON LP."ProdutoId" = P.id WHERE LP."ListumId" = ${idlista} AND P.categoria = '${categ}';`)
+                const existe = existeProd[1].rowCount;
+                if (!existe) {
+                    await lista.addProduto(prod)
                 }
-            }); //atualizando o registro c a nova alteração
-        } catch (erro) {
-            console.error(erro.message);
-            throw erro;
-        }
-    }
-
-    async adicionarProduto(listaId, ProdutoId) {
-
-        const addProduto = await this.lista.findOne({
-            where: {
-                id: listaId,
-            },
-
-        });
-
-        if (!addProduto) {
-            throw new Error("Lista não encontrada!");
-        }
-        if (addProduto.status != "Em andamento") {
-            throw new Error("Carrinho finalizado. Você precisa criar uma nova lista");
-        }
-
-        // const categoriaProd = await addProduto.getProdutos({
-
-        //     where: {
-        //         ProdutoId: ProdutoId
-        //     },
-
-        // });
-        // console.log(categoriaProd)
-        // if (categoriaProd.length != 0) {
-        //     throw new Error("Não é possível adicionar mais de um produto da mesma categoria");
-        // }
-
-        try {
-
-            await this.lista.update({
-                ProdutoId: ProdutoId
-            }, {
-                where: {
-                    id: listaId
+                else {
+                    throw new Error(`Já existe em sua lista um produto dessa categoria: ${categ}!`);
                 }
-            }); //atualizando o registro c a nova alteração
-        } catch (erro) {
-            console.error(erro.message);
-            throw erro;
+            }
         }
     }
 
+    async remover({ clienteId, produtoId, lojaId }) {
+        let lista = await this.lista.findOne({
+            where: {
+                ClienteId: clienteId,
+                LojaId: lojaId,
+                status: 'Em andamento'
+            },
+        });
+        const prod = await produto.findByPk(produtoId)
+        const removido = await lista.removeProduto(prod)
+        if (removido == 0) {
+            throw new Error('Este produto não existe na lista informada para o cliente informado!')
+        }
+        else {
+            return removido;
+        }
+    }
+
+    async get(clienteId) {
+        const listas = await this.lista.findAll({
+            where: {
+                ClienteId: clienteId
+            }
+        });
+        if (listas.length == 0) {
+            throw new Error('Não existem listas para este cliente!')
+        }
+        else {
+            return listas;
+        }
+    }
 }
 
 module.exports = ListaService;
