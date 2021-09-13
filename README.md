@@ -103,10 +103,6 @@ O cliente poderá ter acesso aos seguintes módulos e seus endpoints:
 
 ![Endpoints Clientes][endpoints-cliente]
 
-### Rodando aplicação localmente com Swagger
-
-No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
-
 <!-- CONTACT -->
 
 ## Equipe
