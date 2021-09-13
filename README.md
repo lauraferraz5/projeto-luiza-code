@@ -104,7 +104,7 @@ No browser:
 
 ### Endpoints
 
-O cliente poderá ter acesso aos seguintes módulo e seus endpoints:
+O cliente poderá ter acesso aos seguintes módulos e seus endpoints:
 
 
 ![Endpoints Clientes][endpoints-cliente]
