@@ -104,11 +104,8 @@ No browser:
 
 ### Endpoints
 
-O cliente poderá ter acesso aos seguintes endpoints:
+O cliente poderá ter acesso aos seguintes módulo e seus endpoints:
 
-- Lista de compras
-- Produtos
-- Lojas
 
 ![Endpoints Clientes][endpoints-cliente]
 
@@ -131,6 +128,6 @@ No navegador, digitar <a href=" localhost:3002/docs"> localhost:3002/docs</a>
 <!-- IMAGES -->
 
 
-[endpoints-cliente]: images/swagger.png
+[endpoints-cliente]: images/swagger-completo.png
 
 
