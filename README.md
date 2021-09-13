@@ -86,17 +86,6 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
     npm init
 ```
 
-```sh
-    npm install express
-```
-
-```sh
-    npm install express-routes
-```
-
-```sh
-    npm install sequelize pg
-```
 
 ```sh
     npm run swagger
@@ -107,6 +96,10 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
 ```
 
 6. Executar a API localmente
+
+```sh
+    npm start
+```
 
 ```sh
     localhost:3002/docs
