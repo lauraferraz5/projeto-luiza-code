@@ -102,8 +102,6 @@ Para ter acesso à API, faz-se necessário seguir as instruções abaixo:
     npm run swagger
 ```
 
-OU SOMENTE:
-
 ```sh
     node src/swagger.js
 ```
@@ -124,7 +122,7 @@ O cliente poderá ter acesso aos seguintes endpoints:
 
 ![Endpoints Clientes][endpoints-cliente]
 
-Todos podem acessar a lista de produtos e lojas:
+
 
 ### Rodando aplicação localmente com Swagger
 
