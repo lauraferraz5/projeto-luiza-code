@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h2 align="center">**Luiza code - 3ª edição**</h2>
+  <h2 align="center"><b>Luiza code - 3ª edição</b></h2>
     <h3 align="center">Desafio final</h2>
 
   <p align="center">
@@ -15,9 +15,9 @@
   <summary>Conteúdos</summary>
   <ol>
     <li>
-      <a href="#sobre">Sobre o Projeto</a>
+      <a href="#sobre-o-projeto">Sobre o Projeto</a>
       <ul>
-        <li><a href="#ferramentas">Ferramentas e stack de desenvolvimento</a></li>
+        <li><a href="#ferramentas-utilizadas">Ferramentas e stack de desenvolvimento</a></li>
       </ul>
     </li>
     <ul>
@@ -37,7 +37,7 @@
 Esse projeto foi desenvolvido no encerramento do curso de aceleração de carreiras focado em Node.js e tem como principal objetivo a construção de um serviço HTTP resolvendo a funcionalidade de 
 Omni Channel do cliente. Atendendo e respeitando requisitos e regras de negócio pré-determinados.
 
-### Tecnologias Utilizadas
+### Ferramentas Utilizadas
 
 O projeto foi desenvolvido com auxílios das seguintes ferramentas e stack de desenvolvimento: 
 
