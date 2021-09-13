@@ -1,61 +1,63 @@
-const { produto } = require("../models");
+const { produto, lista, cliente, loja } = require("../models");
 const sequelize = require("../config/sequelize");
 const { QueryTypes } = require('sequelize');
-const lista = require("../models/lista");
 
 class ListaService {
-    constructor(ListaModel) {
-        this.lista = ListaModel;
-    }
 
-    async adicionar({ clienteId, produtoId, lojaId }) {
-        let lista = await this.lista.findOne({
-            where: {
-                ClienteId: clienteId,
-                LojaId: lojaId,
-                status: 'Em andamento'
-            },
-        });
-        if (lista == null) {
-            lista = await this.lista.create({ ClienteId: clienteId, LojaId: lojaId, status: 'Em andamento' })
-            const prod = await produto.findByPk(produtoId)
-            if (prod == null) {
-                throw new Error('Este produto não existe!')
-            }
-            else {
-                await lista.addProduto(prod)
-            }
-        }
-        else {
-            const prod = await produto.findByPk(produtoId)
-            if (prod == null) {
-                throw new Error('Este produto não existe!')
-            }
-            else {
-                const categ = prod.dataValues.categoria
-                const idlista = lista.dataValues.id
-                const existeProd = await sequelize.query(`SELECT FROM lista_produto AS LP INNER JOIN produto AS P ON LP."ProdutoId" = P.id WHERE LP."ListumId" = ${idlista} AND P.categoria = '${categ}';`)
-                const existe = existeProd[1].rowCount;
-                if (!existe) {
-                    await lista.addProduto(prod)
-                }
-                else {
-                    throw new Error(`Já existe em sua lista um produto dessa categoria: ${categ}!`);
-                }
-            }
-        }
-    }
-
-    async remover({ clienteId, produtoId, lojaId }) {
-        let lista = await this.lista.findOne({
-            where: {
-                ClienteId: clienteId,
-                LojaId: lojaId,
-                status: 'Em andamento'
-            },
-        });
+    async adicionar(clienteId, produtoId, lojaId) {
+        console.log('service', clienteId, produtoId, lojaId);
+        // Validar Produto -> se ele existe
         const prod = await produto.findByPk(produtoId)
-        const removido = await lista.removeProduto(prod)
+        if (prod == null)
+            throw new Error('Este produto não existe!')
+
+        // Validar Cliente -> se ele existe
+        const clienteExiste = await cliente.findByPk(clienteId);
+        if (clienteExiste == null)
+            throw new Error('Este cliente não existe!')
+
+        // Validar loja -> se ela existe
+        const lojaExiste = await loja.findByPk(lojaId)
+        if (lojaExiste == null)
+            throw new Error('Esta loja não existe!')
+
+        // Validar se existe produto da mesma categoria na lista
+        // const existeCategoriaProd = await sequelize.query(`SELECT p.categoria FROM lista l INNER JOIN produto p ON l."ProdutoId" = p.id WHERE l."ClienteId" = ${clienteId}`)
+        // console.log(existeCategoriaProd[1].rowCount);
+        // if (existeCategoriaProd[1].rowCount > 0) {
+        //     throw new Error('Já existe um produto com esta categoria cadastrado!');
+        // }
+
+        try {
+            await lista.create({ status: 'Em andamento', ProdutoId: produtoId, ClienteId: clienteId, LojaId: lojaId });
+            return true;
+
+        } catch (error) {
+            throw new Error(`Erro ao inserir na lista de produto: ${error}`);
+        }
+
+    }
+
+    async remover(objRemover) {
+        console.log('cai no service')
+        const { clienteId, produtoId, lojaId } = objRemover;
+
+        console.log(clienteId, produtoId, lojaId);
+        let = await lista.findOne({
+            where: {
+                ClienteId: clienteId,
+                LojaId: lojaId,
+                ProdutoId: produtoId
+            },
+        });
+        console.log(listaRemover);
+        const removido = await lista.destroy({
+            where: {
+                ClienteId: clienteId,
+                LojaId: lojaId,
+                ProdutoId: produtoId
+            }
+        });
         if (removido == 0) {
             throw new Error('Este produto não existe na lista informada para o cliente informado!')
         }
@@ -65,7 +67,7 @@ class ListaService {
     }
 
     async get(clienteId) {
-        const listas = await this.lista.findAll({
+        const listas = await lista.findAll({
             where: {
                 ClienteId: clienteId
             }
@@ -80,7 +82,7 @@ class ListaService {
 
     async atualizarStatus(listaId, status) {
         //verifica o status da lista
-        const listaStatus = await this.lista.findOne({
+        const listaStatus = await lista.findOne({
             where: {
                 id: listaId,
             },

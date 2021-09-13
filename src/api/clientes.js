@@ -20,7 +20,7 @@ router.post("/",
     .isEmpty()
     .matches(/^[0-9]{5}-[0-9]{3}$/)
     .withMessage("Deve ser um CEP válido!")
-    , 
+  ,
 
   body("cidade").not().isEmpty().trim().escape(),
   body("estado").not().isEmpty().trim().escape(),
@@ -60,5 +60,11 @@ router.post("/",
     }
   }
 );
+
+router.get("/",
+  async (req, res) => {
+    const clientes = await clienteService.get();
+    res.status(200).json(clientes);
+  });
 
 module.exports = router;

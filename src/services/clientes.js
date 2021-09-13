@@ -20,6 +20,11 @@ class ClienteService {
       throw erro;
     }
   }
+
+  async get() {
+    const clientes = await this.cliente.findAll();
+    return clientes;
+  }
 }
 
 module.exports = ClienteService;

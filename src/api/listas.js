@@ -42,7 +42,9 @@ router.post("/",
         */
 
         try {
-            await listaService.adicionar(req.body);
+            const { ProdutoId, ClienteId, LojaId } = req.body;
+            const teste = await listaService.adicionar(ClienteId, ProdutoId, LojaId);
+            console.log("ssssssssss", teste);
             res.status(201).send("Produto adicionado à lista com sucesso!");
         } catch (erro) {
             res.status(400).send(erro.message);
@@ -65,12 +67,9 @@ router.get("/:clienteId",
             }
         */
 
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
         try {
             const { clienteId } = req.params
+            console.log(clienteId);
             const listas = await listaService.get(clienteId);
             res.status(200).send(listas);
         } catch (erro) {

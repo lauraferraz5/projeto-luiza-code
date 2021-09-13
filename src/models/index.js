@@ -12,8 +12,9 @@ const loja = Loja(sequelize, Sequelize.DataTypes);
 const lista = Lista(sequelize, Sequelize.DataTypes);
 
 
-lista.belongsTo(cliente)
-lista.belongsTo(loja)
+lista.belongsTo(cliente);
+lista.belongsTo(loja);
+lista.belongsTo(produto);
 
 lista.belongsToMany(produto, { through: 'lista_produto' });
 produto.belongsToMany(lista, { through: 'lista_produto' });
