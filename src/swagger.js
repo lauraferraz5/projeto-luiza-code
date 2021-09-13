@@ -9,9 +9,9 @@ const doc = {
     title: "Magalu Produtos API",
     description: "Swagger da API Omni Channel",
   },
-  host: "localhost:3002",
+  host: "https://luiza-code-heroku.herokuapp.com/",
   basePath: "/",
-  schemes: ["http", "https"],
+  schemes: ["https"],
   consumes: ["application/json"],
   produces: ["application/json"],
   tags: [
@@ -46,7 +46,7 @@ const doc = {
     NovoCliente:
     {
       $nome: "Cláudia",
-      $cpf: "381.493.542-04",
+      $cpf: "899.444.370-34",
       $rg: "000000",
       $cep: "05036-001",
       cidade: "SP",

@@ -5,7 +5,7 @@
     "title": "Magalu Produtos API",
     "description": "Swagger da API Omni Channel"
   },
-  "host": "localhost:3002",
+  "host": "https://luiza-code-heroku.herokuapp.com/",
   "basePath": "/",
   "tags": [
     {
@@ -26,7 +26,6 @@
     }
   ],
   "schemes": [
-    "http",
     "https"
   ],
   "consumes": [
@@ -272,7 +271,7 @@
         },
         "cpf": {
           "type": "string",
-          "example": "381.493.542-04"
+          "example": "899.444.370-34"
         },
         "rg": {
           "type": "string",
