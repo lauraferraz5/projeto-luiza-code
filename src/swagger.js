@@ -72,6 +72,10 @@ const doc = {
       ClienteId: 1,
       LojaId: 2
     },
+    AtualizarStatus:
+    {
+      status: "Em andamento"
+    }
   }
 };
 
