@@ -18,20 +18,30 @@ class ListaService {
         });
         if (lista == null) {
             lista = await this.lista.create({ ClienteId: clienteId, LojaId: lojaId, status: 'Em andamento' })
-            const prod = await produto.findByPk(produtoId) //produto que quero colocar na lista
-            await lista.addProduto(prod)
+            const prod = await produto.findByPk(produtoId)
+            if (prod == null) {
+                throw new Error('Este produto não existe!')
+            }
+            else {
+                await lista.addProduto(prod)
+            }
         }
         else {
             const prod = await produto.findByPk(produtoId)
-            const categ = prod.dataValues.categoria
-            const idlista = lista.dataValues.id
-            const existeProd = await sequelize.query(`SELECT FROM lista_produto AS LP INNER JOIN produto AS P ON LP."ProdutoId" = P.id WHERE LP."ListumId" = ${idlista} AND P.categoria = '${categ}';`)
-            const existe = existeProd[1].rowCount;
-            if (!existe) {
-                await lista.addProduto(prod)
+            if (prod == null) {
+                throw new Error('Este produto não existe!')
             }
             else {
-                throw new Error(`Já existe em sua lista um produto dessa categoria: ${categ}!`);
+                const categ = prod.dataValues.categoria
+                const idlista = lista.dataValues.id
+                const existeProd = await sequelize.query(`SELECT FROM lista_produto AS LP INNER JOIN produto AS P ON LP."ProdutoId" = P.id WHERE LP."ListumId" = ${idlista} AND P.categoria = '${categ}';`)
+                const existe = existeProd[1].rowCount;
+                if (!existe) {
+                    await lista.addProduto(prod)
+                }
+                else {
+                    throw new Error(`Já existe em sua lista um produto dessa categoria: ${categ}!`);
+                }
             }
         }
     }
@@ -45,7 +55,13 @@ class ListaService {
             },
         });
         const prod = await produto.findByPk(produtoId)
-        await lista.removeProduto(prod)
+        const removido = await lista.removeProduto(prod)
+        if (removido == 0) {
+            throw new Error('Este produto não existe na lista informada para o cliente informado!')
+        }
+        else {
+            return removido;
+        }
     }
 
     async get(clienteId) {
@@ -54,7 +70,12 @@ class ListaService {
                 ClienteId: clienteId
             }
         });
-        return listas;
+        if (listas.length == 0) {
+            throw new Error('Não existem listas para este cliente!')
+        }
+        else {
+            return listas;
+        }
     }
 }
 
