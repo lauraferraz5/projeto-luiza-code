@@ -15,6 +15,6 @@ sequelize.sync().then(() => {
   console.log("Conectado com o banco com sucesso!");
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT || 3002, () => {
   console.log("Servidor ativo na porta 3002!");
 });
