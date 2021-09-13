@@ -37,23 +37,12 @@
   "paths": {
     "/produtos/": {
       "get": {
-        "tags": [
-          "Produtos"
-        ],
-        "description": "Endpoint para obter uma lista de produtos.",
+        "tags": [],
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Produto encontrado!",
-            "schema": {
-              "$ref": "#/definitions/Produtos"
-            }
-          },
-          "400": {
-            "description": "Desculpe, tivemos um problema com a requisição!"
-          },
-          "404": {
-            "description": "Não existem produtos cadastrados!"
+            "description": "OK"
           }
         }
       }
@@ -102,6 +91,16 @@
           },
           "400": {
             "description": "Nome, CPF, RG, CEP e numero são campos obrigatórios!"
+          }
+        }
+      },
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

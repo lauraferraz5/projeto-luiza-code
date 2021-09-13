@@ -43,7 +43,7 @@ class ListaService {
         const { clienteId, produtoId, lojaId } = objRemover;
 
         console.log(clienteId, produtoId, lojaId);
-        let = await lista.findOne({
+        let list = await lista.findOne({
             where: {
                 ClienteId: clienteId,
                 LojaId: lojaId,
