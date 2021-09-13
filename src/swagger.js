@@ -9,7 +9,7 @@ const doc = {
     title: "Magalu Produtos API",
     description: "Swagger da API Omni Channel",
   },
-  host: "https://luiza-code-heroku.herokuapp.com/",
+  host: "luiza-code-heroku.herokuapp.com",
   basePath: "/",
   schemes: ["https"],
   consumes: ["application/json"],
