@@ -21,12 +21,12 @@ class ListaService {
         if (lojaExiste == null)
             throw new Error('Esta loja não existe!')
 
-        //Validar se existe produto da mesma categoria na lista
-        const existeCategoriaProd = await sequelize.query(`SELECT p.categoria FROM lista l INNER JOIN produto p ON l."ProdutoId" = p.id WHERE l."ClienteId" = ${clienteId}`)
-
-        if (existeCategoriaProd[1].rowCount > 0) {
-            throw new Error('Já existe um produto com esta categoria cadastrado!');
-        }
+        // Validar se existe produto da mesma categoria na lista
+        // const existeCategoriaProd = await sequelize.query(`SELECT p.categoria FROM lista l INNER JOIN produto p ON l."ProdutoId" = p.id WHERE l."ClienteId" = ${clienteId}`)
+        // console.log(existeCategoriaProd[1].rowCount);
+        // if (existeCategoriaProd[1].rowCount > 0) {
+        //     throw new Error('Já existe um produto com esta categoria cadastrado!');
+        // }
 
         try {
             await lista.create({ status: 'Em andamento', ProdutoId: produtoId, ClienteId: clienteId, LojaId: lojaId });
