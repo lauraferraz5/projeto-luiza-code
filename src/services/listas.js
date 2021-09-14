@@ -77,23 +77,27 @@ class ListaService {
         }
     }
 
-    async atualizarStatus(listaId, status) {
+    async atualizarStatus(listaId, status, clienteId) {
         //verifica o status da lista
         const listaStatus = await lista.findOne({
             where: {
-                id: listaId,
+                id: listaId
+                // ClienteId: clienteId,
+                // LojaId: lojaId,
+                // ProdutoId: produtoId
             },
         });
 
         if (!listaStatus) {
             throw new Error("Lista não encontrada!");
         }
-        if (listaStatus.status != "Em andamento" || listaStatus.status != "Realizada" || listaStatus.status != "Retirada") {
+        if(!["Em andamento", "Realizado", "Retirado"].includes(listaStatus.status)) {
+        // if (listaStatus.status != "Em andamento" || listaStatus.status != "Realizado" || listaStatus.status != "Retirada") {
             throw new Error("Status da compra inválido");
         }
         try {
 
-            await this.lista.update({ status: status }, { where: { id: listaId } }); //atualizando o registro c a nova alteração
+            await lista.update({ status: status }, { where: { id: listaId } }); //atualizando o registro c a nova alteração
         } catch (erro) {
             console.error(erro.message);
             throw erro;

@@ -113,6 +113,7 @@ router.put("/:listaId",
     body("status").not().isEmpty().trim().escape(),
 
     async (req, res) => {
+        console.log("Diabo")
         /*
             #swagger.tags = ['Listas']
             #swagger.description = 'Endpoint para atualizar status de uma lista.'
@@ -131,16 +132,18 @@ router.put("/:listaId",
             }
         */
 
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //     return res.status(400).json({ errors: errors.array() });
+        // }
 
         let { listaId } = req.params;
-        const { status } = req.body;
+        const { status, clienteId } = req.body;
 
+        console.log("Diabo 2")
         try {
-            await listaService.atualizarStatus(listaId, status);
+            console.log("Diabo 3")
+            await listaService.atualizarStatus(listaId, status, clienteId);
             res.status(200).send("Lista atualizada com sucesso!");
         } catch (erro) {
             res.status(400).send(erro.message);
