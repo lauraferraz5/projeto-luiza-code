@@ -37,12 +37,20 @@
   "paths": {
     "/produtos/": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para obter todas os produtos disponíveis.",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Desculpe, tivemos um problema com a requisição"
+          },
+          "404": {
+            "description": "Produto não encontrado"
           }
         }
       }
