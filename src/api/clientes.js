@@ -41,7 +41,7 @@ router.post("/",
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      await clienteService.adicionar(...req.body);
+      await clienteService.adicionar(req.body);
       res.status(201).send("Cliente cadastrado com sucesso!");
     } catch (erro) {
       res.status(400).send(erro.message);
