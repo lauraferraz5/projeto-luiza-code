@@ -24,6 +24,7 @@
     "express-validator": "^6.12.1",
     "pg": "^8.7.1",
     "sequelize": "^6.6.5",
+    "swagger": "^0.7.5",
     "swagger-autogen": "^2.11.2",
     "swagger-ui-express": "^4.1.6"
   },

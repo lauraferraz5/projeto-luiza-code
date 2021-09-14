@@ -37,20 +37,12 @@
   "paths": {
     "/produtos/": {
       "get": {
-        "tags": [
-          "Produtos"
-        ],
-        "description": "Endpoint para obter todas os produtos disponíveis.",
+        "tags": [],
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Desculpe, tivemos um problema com a requisição"
-          },
-          "404": {
-            "description": "Produto não encontrado"
           }
         }
       }
@@ -328,23 +320,23 @@
     "AdicionarProduto": {
       "type": "object",
       "properties": {
-        "clienteId": {
+        "ClienteId": {
           "type": "number",
           "example": 2
         },
-        "lojaId": {
+        "LojaId": {
           "type": "number",
           "example": 2
         },
-        "produtoId": {
+        "ProdutoId": {
           "type": "number",
           "example": 4
         }
       },
       "required": [
-        "clienteId",
-        "lojaId",
-        "produtoId"
+        "ClienteId",
+        "LojaId",
+        "ProdutoId"
       ]
     },
     "ListarListas": {

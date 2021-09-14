@@ -44,7 +44,7 @@ router.post("/",
         try {
             const { ProdutoId, ClienteId, LojaId } = req.body;
             const teste = await listaService.adicionar(ClienteId, ProdutoId, LojaId);
-            console.log("ssssssssss", teste);
+
             res.status(201).send("Produto adicionado à lista com sucesso!");
         } catch (erro) {
             res.status(400).send(erro.message);
@@ -69,7 +69,7 @@ router.get("/:clienteId",
 
         try {
             const { clienteId } = req.params
-            console.log(clienteId);
+
             const listas = await listaService.get(clienteId);
             res.status(200).send(listas);
         } catch (erro) {
@@ -113,7 +113,7 @@ router.put("/:listaId",
     body("status").not().isEmpty().trim().escape(),
 
     async (req, res) => {
-        console.log("Diabo")
+
         /*
             #swagger.tags = ['Listas']
             #swagger.description = 'Endpoint para atualizar status de uma lista.'
@@ -140,9 +140,7 @@ router.put("/:listaId",
         let { listaId } = req.params;
         const { status, clienteId } = req.body;
 
-        console.log("Diabo 2")
         try {
-            console.log("Diabo 3")
             await listaService.atualizarStatus(listaId, status, clienteId);
             res.status(200).send("Lista atualizada com sucesso!");
         } catch (erro) {

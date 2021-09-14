@@ -5,7 +5,7 @@ const { QueryTypes } = require('sequelize');
 class ListaService {
 
     async adicionar(clienteId, produtoId, lojaId) {
-        console.log('service', clienteId, produtoId, lojaId);
+
         // Validar Produto -> se ele existe
         const prod = await produto.findByPk(produtoId)
         if (prod == null)
@@ -91,8 +91,8 @@ class ListaService {
         if (!listaStatus) {
             throw new Error("Lista não encontrada!");
         }
-        if(!["Em andamento", "Realizado", "Retirado"].includes(listaStatus.status)) {
-        // if (listaStatus.status != "Em andamento" || listaStatus.status != "Realizado" || listaStatus.status != "Retirada") {
+        if (!["Em andamento", "Realizado", "Retirado"].includes(listaStatus.status)) {
+            // if (listaStatus.status != "Em andamento" || listaStatus.status != "Realizado" || listaStatus.status != "Retirada") {
             throw new Error("Status da compra inválido");
         }
         try {
