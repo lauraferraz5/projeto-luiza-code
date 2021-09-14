@@ -59,9 +59,9 @@ const doc = {
     },
     AdicionarProduto:
     {
-      $clienteId: 2,
-      $lojaId: 2,
-      $produtoId: 4
+      $ClienteId: 2,
+      $LojaId: 2,
+      $ProdutoId: 4
     },
     ListarListas:
     {
