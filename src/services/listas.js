@@ -39,18 +39,15 @@ class ListaService {
     }
 
     async remover(objRemover) {
-        console.log('cai no service')
         const { clienteId, produtoId, lojaId } = objRemover;
 
-        console.log(clienteId, produtoId, lojaId);
-        let list = await lista.findOne({
+        let listaRemover = await lista.findOne({
             where: {
                 ClienteId: clienteId,
                 LojaId: lojaId,
                 ProdutoId: produtoId
             },
         });
-        console.log(listaRemover);
         const removido = await lista.destroy({
             where: {
                 ClienteId: clienteId,
